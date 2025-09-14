@@ -3,11 +3,23 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --sky: #c3ebfa;
+  --skyLight: #edf9fd;
+  --purple: #cfceff;
+  --purpleLight: #f1f0ff;
+  --yellow: #fae27c;
+  --yellowLight: #fefce8;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-sky: var(--sky);
+  --color-skyLight: var(--skyLight);
+  --color-purple: var(--purple);
+  --color-purpleLight: var(--purpleLight);
+  --color-yellow: var(--yellow);
+  --color-yellowLight: var(--yellowLight);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
