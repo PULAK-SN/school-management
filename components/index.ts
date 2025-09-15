@@ -6,6 +6,7 @@ import AttendanceChart from "./attendance-chart";
 import FinanceChart from "./finance-chart";
 import EventCalendar from "./event-calendar";
 import Announcements from "./announcements";
+import BigCalendar from "./big-calendar";
 
 export {
   Navbar,
@@ -16,4 +17,5 @@ export {
   FinanceChart,
   EventCalendar,
   Announcements,
+  BigCalendar,
 };
