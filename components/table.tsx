@@ -1,14 +1,14 @@
-type ItemProps = {
-  id: number;
-  teacherId: string;
-  name: string;
-  email?: string;
-  photo: string;
-  phone: string;
-  subjects: string[];
-  classes: string[];
-  address: string;
-};
+// type ItemProps = {
+//   id: number;
+//   teacherId: string;
+//   name: string;
+//   email?: string;
+//   photo: string;
+//   phone: string;
+//   subjects: string[];
+//   classes: string[];
+//   address: string;
+// };
 
 const Table = ({
   columns,
@@ -16,7 +16,7 @@ const Table = ({
   data,
 }: {
   columns: { header: string; accessor: string; className?: string }[];
-  renderRow: (item: ItemProps) => React.ReactNode;
+  renderRow: (item: any) => React.ReactNode;
   data: any[];
 }) => {
   return (
