@@ -7,6 +7,9 @@ import FinanceChart from "./finance-chart";
 import EventCalendar from "./event-calendar";
 import Announcements from "./announcements";
 import BigCalendar from "./big-calendar";
+import TableSearch from "./table-search";
+import Pagination from "./pagination";
+import Table from "./table";
 
 export {
   Navbar,
@@ -18,4 +21,7 @@ export {
   EventCalendar,
   Announcements,
   BigCalendar,
+  TableSearch,
+  Pagination,
+  Table
 };
