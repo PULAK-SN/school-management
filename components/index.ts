@@ -10,6 +10,7 @@ import BigCalendar from "./big-calendar";
 import TableSearch from "./table-search";
 import Pagination from "./pagination";
 import Table from "./table";
+import Performance from "./performance";
 
 export {
   Navbar,
@@ -23,5 +24,6 @@ export {
   BigCalendar,
   TableSearch,
   Pagination,
-  Table
+  Table,
+  Performance,
 };

@@ -71,13 +71,13 @@ const StudentList = () => {
       <td className="hidden lg:table-cell">{item.address}</td>
       <td>
         <div className="flex items-center gap-2">
-          <Link href={`/list/teachers/${item.id}`}>
-            <button className="w-7 h-7 flex items-center justify-center rounded-full bg-sky">
+          <Link href={`/list/students/${item.id}`}>
+            <button className="w-7 h-7 flex items-center justify-center cursor-pointer rounded-full bg-sky">
               <Image src="/view.png" alt="" width={16} height={16} />
             </button>
           </Link>
           {role === "admin" && (
-            <button className="w-7 h-7 flex items-center justify-center rounded-full bg-purple">
+            <button className="w-7 h-7 flex items-center justify-center cursor-pointer rounded-full bg-purple">
               <Image src="/delete.png" alt="" width={16} height={16} />
             </button>
           )}
@@ -93,16 +93,16 @@ const StudentList = () => {
         <div className="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
           <TableSearch />
           <div className="flex items-center gap-4 self-end">
-            <button className="h-8 w-8 flex items-center justify-center rounded-full bg-yellow">
+            <button className="h-8 w-8 flex items-center justify-center cursor-pointer rounded-full bg-yellow">
               <Image src={"/filter.png"} alt="filter" height={14} width={14} />
             </button>
 
-            <button className="h-8 w-8 flex items-center justify-center rounded-full bg-yellow">
+            <button className="h-8 w-8 flex items-center justify-center cursor-pointer rounded-full bg-yellow">
               <Image src={"/sort.png"} alt="filter" height={14} width={14} />
             </button>
 
             {role === "admin" && (
-              <button className="h-8 w-8 flex items-center justify-center rounded-full bg-yellow">
+              <button className="h-8 w-8 flex items-center justify-center cursor-pointer rounded-full bg-yellow">
                 <Image src={"/plus.png"} alt="filter" height={14} width={14} />
               </button>
             )}
