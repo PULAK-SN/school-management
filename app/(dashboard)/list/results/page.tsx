@@ -1,7 +1,6 @@
-import { Pagination, Table, TableSearch } from "@/components";
+import { FormModal, Pagination, Table, TableSearch } from "@/components";
 import { resultsData, role } from "@/lib/data";
 import Image from "next/image";
-import Link from "next/link";
 
 type Result = {
   id: number;
@@ -65,15 +64,11 @@ const ResultsList = () => {
       <td className="hidden md:table-cell">{item.date}</td>
       <td>
         <div className="flex items-center gap-2">
-          <Link href={`/list/teachers/${item.id}`}>
-            <button className="w-7 h-7 flex items-center justify-center cursor-pointer rounded-full bg-sky">
-              <Image src="/edit.png" alt="" width={16} height={16} />
-            </button>
-          </Link>
           {role === "admin" && (
-            <button className="w-7 h-7 flex items-center justify-center rounded-full cursor-pointer bg-purple">
-              <Image src="/delete.png" alt="" width={16} height={16} />
-            </button>
+            <>
+              <FormModal table="result" type="update" data={item} />
+              <FormModal table="result" type="delete" id={item.id} />
+            </>
           )}
         </div>
       </td>
@@ -96,11 +91,7 @@ const ResultsList = () => {
               <Image src={"/sort.png"} alt="filter" height={14} width={14} />
             </button>
 
-            {role === "admin" && (
-              <button className="h-8 w-8 flex items-center justify-center cursor-pointer rounded-full bg-yellow">
-                <Image src={"/plus.png"} alt="filter" height={14} width={14} />
-              </button>
-            )}
+            {role === "admin" && <FormModal table="result" type="create" />}
           </div>
         </div>
       </div>

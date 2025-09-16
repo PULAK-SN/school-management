@@ -1,7 +1,6 @@
-import { Pagination, Table, TableSearch } from "@/components";
+import { FormModal, Pagination, Table, TableSearch } from "@/components";
 import { eventsData, role } from "@/lib/data";
 import Image from "next/image";
-import Link from "next/link";
 
 type Event = {
   id: number;
@@ -56,15 +55,11 @@ const EventList = () => {
       <td className="hidden md:table-cell">{item.endTime}</td>
       <td>
         <div className="flex items-center gap-2">
-          <Link href={`/list/teachers/${item.id}`}>
-            <button className="w-7 h-7 flex items-center justify-center cursor-pointer rounded-full bg-sky">
-              <Image src="/edit.png" alt="" width={16} height={16} />
-            </button>
-          </Link>
           {role === "admin" && (
-            <button className="w-7 h-7 flex items-center justify-center cursor-pointer rounded-full bg-purple">
-              <Image src="/delete.png" alt="" width={16} height={16} />
-            </button>
+            <>
+              <FormModal table="event" type="update" data={item} />
+              <FormModal table="event" type="delete" id={item.id} />
+            </>
           )}
         </div>
       </td>
@@ -87,11 +82,7 @@ const EventList = () => {
               <Image src={"/sort.png"} alt="filter" height={14} width={14} />
             </button>
 
-            {role === "admin" && (
-              <button className="h-8 w-8 flex items-center justify-center cursor-pointer rounded-full bg-yellow">
-                <Image src={"/plus.png"} alt="filter" height={14} width={14} />
-              </button>
-            )}
+            {role === "admin" && <FormModal table="event" type="create" />}
           </div>
         </div>
       </div>

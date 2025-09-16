@@ -11,6 +11,7 @@ import TableSearch from "./table-search";
 import Pagination from "./pagination";
 import Table from "./table";
 import Performance from "./performance";
+import FormModal from "./form-modal";
 
 export {
   Navbar,
@@ -26,4 +27,5 @@ export {
   Pagination,
   Table,
   Performance,
+  FormModal,
 };
