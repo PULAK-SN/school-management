@@ -1,19 +1,11 @@
 import { FormModal, Pagination, Table, TableSearch } from "@/components";
-import { role, teachersData } from "@/lib/data";
+import { role } from "@/lib/data";
+import { Class, Subject, Teacher } from "@/lib/generated/prisma";
+import prisma from "@/lib/prisma";
 import Image from "next/image";
 import Link from "next/link";
 
-type Teacher = {
-  id: number;
-  teacherId: string;
-  name: string;
-  email?: string;
-  photo: string;
-  phone: string;
-  subjects: string[];
-  classes: string[];
-  address: string;
-};
+type TeacherList = Teacher & { subjects: Subject[] } & { classes: Class[] };
 
 const columns = [
   {
@@ -50,15 +42,22 @@ const columns = [
     accessor: "action",
   },
 ];
-const TeacherList = () => {
-  const renderRow = (item: Teacher) => (
+const TeacherList = async () => {
+  const teachers = await prisma.teacher.findMany({
+    include: { subjects: true, classes: true },
+    take: 10,
+  });
+
+  // console.log({ teachers });
+
+  const renderRow = (item: TeacherList) => (
     <tr
       key={item.id}
       className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-purpleLight"
     >
       <td className="flex items-center gap-4 p-4">
         <Image
-          src={item.photo}
+          src={item.img || "/noAvatar.png"}
           alt="photo"
           width={40}
           height={40}
@@ -69,9 +68,13 @@ const TeacherList = () => {
           <p className="text-xs text-gray-500">{item?.email}</p>
         </div>
       </td>
-      <td className="hidden md:table-cell">{item.teacherId}</td>
-      <td className="hidden md:table-cell">{item.subjects.join(",")}</td>
-      <td className="hidden md:table-cell">{item.classes.join(",")}</td>
+      <td className="hidden md:table-cell">{item.username}</td>
+      <td className="hidden md:table-cell">
+        {item.subjects.map((subject) => subject.name).join(",")}
+      </td>
+      <td className="hidden md:table-cell">
+        {item.classes.map((classItem) => classItem.name).join(",")}
+      </td>
       <td className="hidden lg:table-cell">{item.phone}</td>
       <td className="hidden lg:table-cell">{item.address}</td>
       <td>
@@ -88,6 +91,7 @@ const TeacherList = () => {
       </td>
     </tr>
   );
+
   return (
     <div className="bg-white rounded-md p-4 m-4 mt-0 flex-1">
       {/* top */}
@@ -110,7 +114,7 @@ const TeacherList = () => {
       </div>
 
       {/* list */}
-      <Table columns={columns} renderRow={renderRow} data={teachersData} />
+      <Table columns={columns} renderRow={renderRow} data={teachers} />
 
       {/* pagination */}
       <Pagination />
