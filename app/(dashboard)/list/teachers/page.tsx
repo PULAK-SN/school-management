@@ -1,7 +1,9 @@
+export const dynamic = "force-dynamic";
 import { FormModal, Pagination, Table, TableSearch } from "@/components";
 import { role } from "@/lib/data";
 import { Class, Subject, Teacher } from "@/lib/generated/prisma";
 import prisma from "@/lib/prisma";
+import { ITEM_PER_PAGE } from "@/lib/settings";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -42,13 +44,26 @@ const columns = [
     accessor: "action",
   },
 ];
-const TeacherList = async () => {
-  const teachers = await prisma.teacher.findMany({
-    include: { subjects: true, classes: true },
-    take: 10,
-  });
+const TeacherList = async ({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | undefined };
+}) => {
+  const { page, ...queryParams } = await searchParams;
 
-  // console.log({ teachers });
+  // console.log({ page });
+
+  const p = page ? parseInt(page) : 1;
+  const [data, count] = await prisma.$transaction([
+    prisma.teacher.findMany({
+      include: { subjects: true, classes: true },
+      take: ITEM_PER_PAGE,
+      skip: ITEM_PER_PAGE * (p - 1),
+    }),
+    prisma.teacher.count(),
+  ]);
+
+  // console.log({ count });
 
   const renderRow = (item: TeacherList) => (
     <tr
@@ -114,10 +129,10 @@ const TeacherList = async () => {
       </div>
 
       {/* list */}
-      <Table columns={columns} renderRow={renderRow} data={teachers} />
+      <Table columns={columns} renderRow={renderRow} data={data} />
 
       {/* pagination */}
-      <Pagination />
+      <Pagination page={p} count={count} />
     </div>
   );
 };
