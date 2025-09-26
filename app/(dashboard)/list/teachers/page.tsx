@@ -1,7 +1,7 @@
 export const dynamic = "force-dynamic";
 import { FormModal, Pagination, Table, TableSearch } from "@/components";
 import { role } from "@/lib/data";
-import { Class, Subject, Teacher } from "@/lib/generated/prisma";
+import { Class, Prisma, Subject, Teacher } from "@/lib/generated/prisma";
 import prisma from "@/lib/prisma";
 import { ITEM_PER_PAGE } from "@/lib/settings";
 import Image from "next/image";
@@ -51,16 +51,31 @@ const TeacherList = async ({
 }) => {
   const { page, ...queryParams } = await searchParams;
 
-  // console.log({ page });
+  // URL params conditions
 
+  const query: Prisma.TeacherWhereInput = {};
+  if (queryParams) {
+    for (const [key, value] of Object.entries(queryParams)) {
+      if (value !== undefined) {
+        switch (key) {
+          case "classId":
+            query.lessons = { some: { classId: parseInt(value) } };
+            break;
+          case "search":
+            query.name = { contains: value, mode: "insensitive" };
+        }
+      }
+    }
+  }
   const p = page ? parseInt(page) : 1;
   const [data, count] = await prisma.$transaction([
     prisma.teacher.findMany({
+      where: query,
       include: { subjects: true, classes: true },
       take: ITEM_PER_PAGE,
       skip: ITEM_PER_PAGE * (p - 1),
     }),
-    prisma.teacher.count(),
+    prisma.teacher.count({ where: query }),
   ]);
 
   // console.log({ count });
