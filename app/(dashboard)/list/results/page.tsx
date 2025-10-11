@@ -1,22 +1,26 @@
 import { FormModal, Pagination, Table, TableSearch } from "@/components";
-import { resultsData, role } from "@/lib/data";
+import { role } from "@/lib/data";
+import { Prisma } from "@/lib/generated/prisma";
+import prisma from "@/lib/prisma";
+import { ITEM_PER_PAGE } from "@/lib/settings";
 import Image from "next/image";
 
-type Result = {
+type ResultList = {
   id: number;
-  subject: string;
-  class: string;
-  teacher: string;
-  student: string;
-  type: "exam" | "assignment";
-  date: string;
+  title: string;
+  studentName: string;
+  studentSurname: string;
+  teacherName: string;
+  teacherSurname: string;
   score: number;
+  className: string;
+  startTime: Date;
 };
 
 const columns = [
   {
-    header: "Subject Name",
-    accessor: "name",
+    header: "Title",
+    accessor: "title",
   },
   {
     header: "Student",
@@ -50,31 +54,119 @@ const columns = [
   },
 ];
 
-const ResultsList = () => {
-  const renderRow = (item: Result) => (
-    <tr
-      key={item.id}
-      className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-purpleLight"
-    >
-      <td className="flex items-center gap-4 p-4">{item.subject}</td>
-      <td className="hidden md:table-cell">{item.student}</td>
-      <td className="hidden md:table-cell">{item.score}</td>
-      <td className="hidden md:table-cell">{item.teacher}</td>
-      <td className="hidden md:table-cell">{item.class}</td>
-      <td className="hidden md:table-cell">{item.date}</td>
-      <td>
-        <div className="flex items-center gap-2">
-          {role === "admin" && (
-            <>
-              <FormModal table="result" type="update" data={item} />
-              <FormModal table="result" type="delete" id={item.id} />
-            </>
-          )}
-        </div>
-      </td>
-    </tr>
-  );
+const renderRow = (item: ResultList) => (
+  <tr
+    key={item.id}
+    className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-purpleLight"
+  >
+    <td className="flex items-center gap-4 p-4">{item.title}</td>
+    <td className="hidden md:table-cell">
+      {item.studentName + " " + item.studentSurname}
+    </td>
+    <td className="hidden md:table-cell">{item.score}</td>
+    <td className="hidden md:table-cell">
+      {item.teacherName + " " + item.teacherSurname}
+    </td>
+    <td className="hidden md:table-cell">{item.className}</td>
+    <td className="hidden md:table-cell">
+      {new Intl.DateTimeFormat("en-US").format(item.startTime)}
+    </td>
+    <td>
+      <div className="flex items-center gap-2">
+        {role === "admin" && (
+          <>
+            <FormModal table="result" type="update" data={item} />
+            <FormModal table="result" type="delete" id={item.id} />
+          </>
+        )}
+      </div>
+    </td>
+  </tr>
+);
 
+const ResultsList = async ({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | undefined };
+}) => {
+  const { page, ...queryParams } = await searchParams;
+
+  // URL params conditions
+
+  const query: Prisma.ResultWhereInput = {};
+  if (queryParams) {
+    for (const [key, value] of Object.entries(queryParams)) {
+      if (value !== undefined) {
+        switch (key) {
+          case "studentId":
+            query.studentId = value;
+            break;
+          case "search":
+            query.OR = [
+              { exam: { title: { contains: value, mode: "insensitive" } } },
+              {
+                assignment: { title: { contains: value, mode: "insensitive" } },
+              },
+            ];
+            break;
+          default:
+            break;
+        }
+      }
+    }
+  }
+
+  const p = page ? parseInt(page) : 1;
+
+  const [dataRes, count] = await prisma.$transaction([
+    prisma.result.findMany({
+      where: query,
+      include: {
+        student: { select: { name: true, surname: true } },
+        exam: {
+          include: {
+            lesson: {
+              select: {
+                class: { select: { name: true } },
+                teacher: { select: { name: true, surname: true } },
+              },
+            },
+          },
+        },
+        assignment: {
+          include: {
+            lesson: {
+              select: {
+                class: { select: { name: true } },
+                teacher: { select: { name: true, surname: true } },
+              },
+            },
+          },
+        },
+      },
+      take: ITEM_PER_PAGE,
+      skip: ITEM_PER_PAGE * (p - 1),
+    }),
+    prisma.result.count({ where: query }),
+  ]);
+
+  const data = dataRes.map((item) => {
+    const assesment = item.exam || item.assignment;
+
+    if (!assesment) return null;
+    const isExam = "startTime" in assesment;
+    return {
+      id: item.id,
+      title: assesment.title,
+      studentName: item.student.name,
+      studentSurname: item.student.surname,
+      teacherName: assesment.lesson.teacher.name,
+      teacherSurname: assesment.lesson.teacher.surname,
+      score: item.score,
+      className: assesment.lesson.class.name,
+      startTime: isExam ? assesment.startTime : assesment.startDate,
+    };
+  });
   return (
     <div className="bg-white rounded-md p-4 m-4 mt-0 flex-1">
       {/* top */}
@@ -97,10 +189,10 @@ const ResultsList = () => {
       </div>
 
       {/* list */}
-      <Table columns={columns} renderRow={renderRow} data={resultsData} />
+      <Table columns={columns} renderRow={renderRow} data={data} />
 
       {/* pagination */}
-      <Pagination />
+      <Pagination page={p} count={count} />
     </div>
   );
 };

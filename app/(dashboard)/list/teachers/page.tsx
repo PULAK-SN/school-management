@@ -63,10 +63,14 @@ const TeacherList = async ({
             break;
           case "search":
             query.name = { contains: value, mode: "insensitive" };
+            break;
+          default:
+            break;
         }
       }
     }
   }
+
   const p = page ? parseInt(page) : 1;
   const [data, count] = await prisma.$transaction([
     prisma.teacher.findMany({
