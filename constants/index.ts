@@ -113,24 +113,6 @@ export const menuItems = [
   },
 ];
 
-export const studentData = [
-  {
-    name: "Total",
-    count: 100,
-    fill: "white",
-  },
-  {
-    name: "Girls",
-    count: 45,
-    fill: "#FAE27C",
-  },
-  {
-    name: "Boys",
-    count: 55,
-    fill: "#C3EBFA",
-  },
-];
-
 export const incomeData = [
   {
     name: "Jan",
