@@ -1,6 +1,5 @@
 "use server";
 import Image from "next/image";
-import React from "react";
 import CountChart from "./count-chart";
 import prisma from "@/lib/prisma";
 
