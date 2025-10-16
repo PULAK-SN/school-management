@@ -1,13 +1,16 @@
-import { Announcements, BigCalendar } from "@/components";
+import { Announcements } from "@/components";
+import BigCalendarContainer from "@/components/big-calendar-container";
+import { auth } from "@clerk/nextjs/server";
 
-const TeacherPage = () => {
+const TeacherPage = async () => {
+  const { userId } = await auth();
   return (
     <div className="flex-1 p-4 flex gap-4 flex-col xl:flex-row">
       {/* left */}
       <div className="w-full xl:w-2/3">
         <div className="h-full bg-white rounded-md p-4">
           <h1 className="text-xl font-semibold">Schedule</h1>
-          <BigCalendar />
+          <BigCalendarContainer type="teacherId" id={userId!} />
         </div>
       </div>
 
