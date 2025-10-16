@@ -1,14 +1,16 @@
-import {
-  Announcements,
-  AttendanceChart,
-  EventCalendar,
-  FinanceChart,
-  UserCard,
-} from "@/components";
+"use server";
+import { Announcements, FinanceChart, UserCard } from "@/components";
 import AttendanceChartContainer from "@/components/attendance-chart-container";
 import CountChartContainer from "@/components/count-chart-container";
+import EventCalendarContainer from "@/components/event-calendar-container";
 
-const AdminPage = () => {
+const AdminPage = async ({
+  searchParams,
+}: {
+  searchParams: {
+    [keys: string]: string | undefined;
+  };
+}) => {
   return (
     <div className="w-full flex flex-col md:flex-row gap-4 p-4">
       {/* left */}
@@ -41,7 +43,7 @@ const AdminPage = () => {
 
       {/* right */}
       <div className="w-full lg:w-1/3 flex flex-col gap-8">
-        <EventCalendar />
+        <EventCalendarContainer searchParams={searchParams} />
         <Announcements />
       </div>
     </div>
