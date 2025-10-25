@@ -12,7 +12,7 @@ const ClassList = async ({
 }: {
   searchParams: { [key: string]: string | undefined };
 }) => {
-  const role = await getUserRole();
+  const { role } = await getUserRole();
   const { page, ...queryParams } = await searchParams;
 
   const columns = [

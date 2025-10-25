@@ -1,4 +1,5 @@
-import { FormModal, Pagination, Table, TableSearch } from "@/components";
+import { Pagination, Table, TableSearch } from "@/components";
+import FormContainer from "@/components/form-container";
 import { Prisma, Subject, Teacher } from "@/lib/generated/prisma";
 import prisma from "@/lib/prisma";
 import { ITEM_PER_PAGE } from "@/lib/settings";
@@ -45,8 +46,8 @@ const SubjectList = async ({
         <div className="flex items-center gap-2">
           {role === "admin" && (
             <>
-              <FormModal table="subject" type="update" data={item} />
-              <FormModal table="subject" type="delete" id={item.id} />
+              <FormContainer table="subject" type="update" data={item} />
+              <FormContainer table="subject" type="delete" id={item.id} />
             </>
           )}
         </div>
@@ -97,7 +98,9 @@ const SubjectList = async ({
               <Image src={"/sort.png"} alt="filter" height={14} width={14} />
             </button>
 
-            {role === "admin" && <FormModal table="subject" type="create" />}
+            {role === "admin" && (
+              <FormContainer table="subject" type="create" />
+            )}
           </div>
         </div>
       </div>

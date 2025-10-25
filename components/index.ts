@@ -12,8 +12,6 @@ import Pagination from "./pagination";
 import Table from "./table";
 import Performance from "./performance";
 import FormModal from "./form-modal";
-// import TeacherForm from "./forms/teacher-form";
-// import StudentForm from "./forms/student-form";
 import InputField from "./input-field";
 
 export {
@@ -31,7 +29,5 @@ export {
   Table,
   Performance,
   FormModal,
-  // TeacherForm,
-  // StudentForm,
   InputField,
 };
