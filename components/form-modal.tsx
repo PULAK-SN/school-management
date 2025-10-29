@@ -9,14 +9,14 @@ import {
   useState,
 } from "react";
 import dynamic from "next/dynamic";
-import { deleteSubject } from "@/lib/server-action";
+import { deleteClass, deleteSubject } from "@/lib/server-action";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { FormContainerProps } from "./form-container";
 
 const deleteActionMap = {
   subject: deleteSubject,
-  class: deleteSubject,
+  class: deleteClass,
   teacher: deleteSubject,
   student: deleteSubject,
   exam: deleteSubject,
@@ -31,9 +31,8 @@ const deleteActionMap = {
   announcement: deleteSubject,
 };
 
-// USE LAZY LOADING
 // import TeacherForm from "./forms/teacher-form";
-// import TeacherForm from "./forms/student-form";
+// USE LAZY LOADING
 
 const TeacherForm = dynamic(() => import("./forms/teacher-form"), {
   loading: () => <h1>Loading...</h1>,
@@ -46,14 +45,9 @@ const StudentForm = dynamic(() => import("./forms/student-form"), {
 const SubjectForm = dynamic(() => import("./forms/subject-form"), {
   loading: () => <h1>Loading...</h1>,
 });
-
-// const ClassForm = dynamic(() => import("./forms/ClassForm"), {
-//   loading: () => <h1>Loading...</h1>,
-// });
-
-// const ExamForm = dynamic(() => import("./forms/ExamForm"), {
-//   loading: () => <h1>Loading...</h1>,
-// });
+const ClassForm = dynamic(() => import("./forms/class-form"), {
+  loading: () => <h1>Loading...</h1>,
+});
 
 const forms: {
   [key: string]: (
@@ -81,6 +75,15 @@ const forms: {
   ),
   subject: (setOpen, type, data, relatedData) => (
     <SubjectForm
+      type={type}
+      data={data}
+      setOpen={setOpen}
+      relatedData={relatedData}
+    />
+  ),
+
+  class: (setOpen, type, data, relatedData) => (
+    <ClassForm
       type={type}
       data={data}
       setOpen={setOpen}

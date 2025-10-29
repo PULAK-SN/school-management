@@ -1,4 +1,5 @@
-import { FormModal, Pagination, Table, TableSearch } from "@/components";
+import { Pagination, Table, TableSearch } from "@/components";
+import FormContainer from "@/components/form-container";
 import { Class, Prisma, Teacher } from "@/lib/generated/prisma";
 import prisma from "@/lib/prisma";
 import { ITEM_PER_PAGE } from "@/lib/settings";
@@ -60,8 +61,8 @@ const ClassList = async ({
         <div className="flex items-center gap-2">
           {role === "admin" && (
             <>
-              <FormModal table="class" type="update" data={item} />
-              <FormModal table="class" type="delete" id={item.id} />
+              <FormContainer table="class" type="update" data={item} />
+              <FormContainer table="class" type="delete" id={item.id} />
             </>
           )}
         </div>
@@ -116,7 +117,7 @@ const ClassList = async ({
               <Image src={"/sort.png"} alt="filter" height={14} width={14} />
             </button>
 
-            {role === "admin" && <FormModal table="class" type="create" />}
+            {role === "admin" && <FormContainer table="class" type="create" />}
           </div>
         </div>
       </div>
