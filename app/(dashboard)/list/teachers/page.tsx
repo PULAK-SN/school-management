@@ -1,5 +1,6 @@
 export const dynamic = "force-dynamic";
-import { FormModal, Pagination, Table, TableSearch } from "@/components";
+import { Pagination, Table, TableSearch } from "@/components";
+import FormContainer from "@/components/form-container";
 import { Class, Prisma, Subject, Teacher } from "@/lib/generated/prisma";
 import prisma from "@/lib/prisma";
 import { ITEM_PER_PAGE } from "@/lib/settings";
@@ -124,7 +125,7 @@ const TeacherList = async ({
             </button>
           </Link>
           {role === "admin" && (
-            <FormModal table="teacher" type="delete" id={item.id} />
+            <FormContainer table="teacher" type="delete" id={item.id} />
           )}
         </div>
       </td>
@@ -147,7 +148,9 @@ const TeacherList = async ({
               <Image src={"/sort.png"} alt="filter" height={14} width={14} />
             </button>
 
-            {role === "admin" && <FormModal table="teacher" type="create" />}
+            {role === "admin" && (
+              <FormContainer table="teacher" type="create" />
+            )}
           </div>
         </div>
       </div>
