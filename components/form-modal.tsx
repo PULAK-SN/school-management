@@ -9,7 +9,7 @@ import {
   useState,
 } from "react";
 import dynamic from "next/dynamic";
-import { deleteClass, deleteSubject } from "@/lib/server-action";
+import { deleteClass, deleteSubject, deleteTeacher } from "@/lib/server-action";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { FormContainerProps } from "./form-container";
@@ -17,7 +17,7 @@ import { FormContainerProps } from "./form-container";
 const deleteActionMap = {
   subject: deleteSubject,
   class: deleteClass,
-  teacher: deleteSubject,
+  teacher: deleteTeacher,
   student: deleteSubject,
   exam: deleteSubject,
 
