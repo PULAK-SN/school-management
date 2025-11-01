@@ -7,13 +7,13 @@ async function main() {
   await prisma.admin.create({
     data: {
       id: "admin1",
-      userName: "admin1",
+      username: "admin1",
     },
   });
   await prisma.admin.create({
     data: {
       id: "admin2",
-      userName: "admin2",
+      username: "admin2",
     },
   });
 

@@ -354,7 +354,7 @@ export const deleteStudent = async (
     return { success: true, error: false };
   } catch (error) {
     console.error(error);
-    console.error(JSON.stringify(error.errors));
+    // console.error(JSON.stringify(error.errors));
     return { success: false, error: true };
   }
 };
