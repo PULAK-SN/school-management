@@ -2,7 +2,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FieldError, useForm } from "react-hook-form";
 import { InputField } from "@/components";
-import { subjectSchema, SubjectSchema } from "@/lib/form-validation-schemas";
+import { subjectSchema } from "@/lib/form-validation-schemas";
 import { createSubject, updateSubject } from "@/lib/server-action";
 import { Dispatch, SetStateAction, useActionState, useEffect } from "react";
 import { toast } from "react-toastify";

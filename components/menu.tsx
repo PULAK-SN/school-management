@@ -6,7 +6,7 @@ import Link from "next/link";
 
 const Menu = async () => {
   const { role } = await getUserRole();
-  console.log({ role });
+  // console.log({ role });
   return (
     <div className="mt-4 text-sm">
       {menuItems.map((i) => (

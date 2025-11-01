@@ -1,4 +1,5 @@
-import { FormModal, Pagination, Table, TableSearch } from "@/components";
+import { Pagination, Table, TableSearch } from "@/components";
+import FormContainer from "@/components/form-container";
 import { Class, Prisma, Student } from "@/lib/generated/prisma";
 import prisma from "@/lib/prisma";
 import { ITEM_PER_PAGE } from "@/lib/settings";
@@ -80,7 +81,7 @@ const StudentList = async ({
             </button>
           </Link>
           {role === "admin" && (
-            <FormModal table="student" type="delete" id={item.id} />
+            <FormContainer table="student" type="delete" id={item.id} />
           )}
         </div>
       </td>
@@ -133,7 +134,9 @@ const StudentList = async ({
               <Image src={"/sort.png"} alt="filter" height={14} width={14} />
             </button>
 
-            {role === "admin" && <FormModal table="student" type="create" />}
+            {role === "admin" && (
+              <FormContainer table="student" type="create" />
+            )}
           </div>
         </div>
       </div>

@@ -9,7 +9,12 @@ import {
   useState,
 } from "react";
 import dynamic from "next/dynamic";
-import { deleteClass, deleteSubject, deleteTeacher } from "@/lib/server-action";
+import {
+  deleteClass,
+  deleteStudent,
+  deleteSubject,
+  deleteTeacher,
+} from "@/lib/server-action";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { FormContainerProps } from "./form-container";
@@ -18,7 +23,7 @@ const deleteActionMap = {
   subject: deleteSubject,
   class: deleteClass,
   teacher: deleteTeacher,
-  student: deleteSubject,
+  student: deleteStudent,
   exam: deleteSubject,
 
   // TODO - LIST
@@ -117,7 +122,7 @@ const FormModal = ({
 
     useEffect(() => {
       if (state.success) {
-        toast.success(`Subject has been deleted! `);
+        toast.success(`${table} has been deleted! `);
         setOpen(false);
         router.refresh();
       }

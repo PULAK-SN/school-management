@@ -52,12 +52,14 @@ const SingleTeacherPage = async ({
               />
             </div>
             <div className="w-2/3 flex flex-col justify-between gap-4">
-              <h1 className="text-xl font-semibold">
-                {teacher?.name + " " + teacher?.surname}
-              </h1>
-              {role === "admin" && (
-                <FormContainer table="teacher" type="update" data={teacher} />
-              )}
+              <div className="flex items-center gap-4">
+                <h1 className="text-xl font-semibold">
+                  {teacher?.name + " " + teacher?.surname}
+                </h1>
+                {role === "admin" && (
+                  <FormContainer table="teacher" type="update" data={teacher} />
+                )}
+              </div>
               <p className="text-sm text-gray-500">
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit.
               </p>

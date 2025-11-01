@@ -11,7 +11,7 @@ import React, { useEffect } from "react";
 const LoginPage = () => {
   const { isSignedIn, user, isLoaded } = useUser();
   const router = useRouter();
-  console.log({ user });
+  // console.log({ user });
   useEffect(() => {
     const role = user?.publicMetadata.role;
     if (role) {
