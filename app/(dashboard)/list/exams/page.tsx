@@ -1,4 +1,5 @@
-import { FormModal, Pagination, Table, TableSearch } from "@/components";
+import { Pagination, Table, TableSearch } from "@/components";
+import FormContainer from "@/components/form-container";
 import { Class, Exam, Prisma, Subject, Teacher } from "@/lib/generated/prisma";
 import prisma from "@/lib/prisma";
 import { ITEM_PER_PAGE } from "@/lib/settings";
@@ -59,14 +60,17 @@ const ExamList = async ({
         {item.lesson.teacher?.name + " " + item.lesson.teacher?.surname}
       </td>
       <td className="hidden md:table-cell">
-        {new Intl.DateTimeFormat("en-US").format(item?.startTime)}
+        {new Intl.DateTimeFormat("en-US", {
+          dateStyle: "medium",
+          timeStyle: "short",
+        }).format(item?.startTime)}
       </td>
       <td>
         <div className="flex items-center gap-2">
           {(role === "admin" || role === "teacher") && (
             <>
-              <FormModal table="exam" type="update" data={item} />
-              <FormModal table="exam" type="delete" id={item.id} />
+              <FormContainer table="exam" type="update" data={item} />
+              <FormContainer table="exam" type="delete" id={item.id} />
             </>
           )}
         </div>
@@ -164,7 +168,7 @@ const ExamList = async ({
             </button>
 
             {(role === "admin" || role === "teacher") && (
-              <FormModal table="exam" type="create" />
+              <FormContainer table="exam" type="create" />
             )}
           </div>
         </div>

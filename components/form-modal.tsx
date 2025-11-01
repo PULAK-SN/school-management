@@ -11,6 +11,7 @@ import {
 import dynamic from "next/dynamic";
 import {
   deleteClass,
+  deleteExam,
   deleteStudent,
   deleteSubject,
   deleteTeacher,
@@ -24,7 +25,7 @@ const deleteActionMap = {
   class: deleteClass,
   teacher: deleteTeacher,
   student: deleteStudent,
-  exam: deleteSubject,
+  exam: deleteExam,
 
   // TODO - LIST
   parent: deleteSubject,
@@ -51,6 +52,9 @@ const SubjectForm = dynamic(() => import("./forms/subject-form"), {
   loading: () => <h1>Loading...</h1>,
 });
 const ClassForm = dynamic(() => import("./forms/class-form"), {
+  loading: () => <h1>Loading...</h1>,
+});
+const ExamForm = dynamic(() => import("./forms/exam-form"), {
   loading: () => <h1>Loading...</h1>,
 });
 
@@ -89,6 +93,15 @@ const forms: {
 
   class: (setOpen, type, data, relatedData) => (
     <ClassForm
+      type={type}
+      data={data}
+      setOpen={setOpen}
+      relatedData={relatedData}
+    />
+  ),
+
+  exam: (setOpen, type, data, relatedData) => (
+    <ExamForm
       type={type}
       data={data}
       setOpen={setOpen}
