@@ -24,7 +24,10 @@ A modern full-stack **Next.js 15 + Clerk + Prisma** web application for managing
 
 ### Single Teacher
 
-![Single Screenshot]
+<p align="center">
+  <img src="./public/ss/single-teacher.png" alt="Login Page Screenshot">
+</p>
+
 <img src="./public/ss/single-teacher.png" width="600" alt="Login Page Screenshot" />
 
 ### Adding New Teacher
