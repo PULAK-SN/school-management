@@ -10,32 +10,32 @@ A modern full-stack **Next.js 15 + Clerk + Prisma** web application for managing
 ### Login Page
 
 ![Login Page Screenshot]
-<img src="./ss/login-page.png" width="600" alt="Login Page Screenshot" />
+<img src="./public/ss/login-page.png" width="600" alt="Login Page Screenshot" />
 
 ### Dashboard
 
 ![Admin Screenshot]
-<img src="./ss/admin-page.png" width="600" alt="Login Page Screenshot" />
+<img src="./public/ss/admin-page.png" width="600" alt="Login Page Screenshot" />
 
 ### Teacher List
 
 ![Teacher List Screenshot]
-<img src="./ss/teacher-list.png" width="600" alt="Login Page Screenshot" />
+<img src="./public/ss/teacher-list.png" width="600" alt="Login Page Screenshot" />
 
 ### Single Teacher
 
 ![Single Screenshot]
-<img src="./ss/single-teacher.png" width="600" alt="Login Page Screenshot" />
+<img src="./public/ss/single-teacher.png" width="600" alt="Login Page Screenshot" />
 
 ### Adding New Teacher
 
 ![New Teacher Create Screenshot]
-<img src="./ss/new-teacher-create.png" width="600" alt="Login Page Screenshot" />
+<img src="./public/ss/new-teacher-create.png" width="600" alt="Login Page Screenshot" />
 
 ### Student List
 
 ![Student List Screenshot]
-<img src="./ss/student-list.png" width="600" alt="Login Page Screenshot" />
+<img src="./public/ss/student-list.png" width="600" alt="Login Page Screenshot" />
 
 > 💡 Tip: You can keep all screenshots in a `screenshots/` folder inside your repo for better organization.
 
