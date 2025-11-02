@@ -1,3 +1,44 @@
+# 🏫 School Management System
+
+A modern full-stack **Next.js 15 + Clerk + Prisma** web application for managing students, teachers, parents, and administrators — built with TypeScript and Tailwind CSS.
+
+🚀 **Live Demo:** [school-management.vercel.app](https://ps-school-management.vercel.app/)  
+🧑‍💻 **Author:** [Pulak Sen](https://github.com/PULAK-SN)
+
+## 🖼️ Screenshots
+
+### Login Page
+
+![Login Page Screenshot]
+<img src="./ss/login-page.png" width="600" alt="Login Page Screenshot" />
+
+### Dashboard
+
+![Admin Screenshot]
+<img src="./ss/admin-page.png" width="600" alt="Login Page Screenshot" />
+
+### Teacher List
+
+![Teacher List Screenshot]
+<img src="./ss/teacher-list.png" width="600" alt="Login Page Screenshot" />
+
+### Single Teacher
+
+![Single Screenshot]
+<img src="./ss/single-teacher.png" width="600" alt="Login Page Screenshot" />
+
+### Adding New Teacher
+
+![New Teacher Create Screenshot]
+<img src="./ss/new-teacher-create.png" width="600" alt="Login Page Screenshot" />
+
+### Student List
+
+![Student List Screenshot]
+<img src="./ss/student-list.png" width="600" alt="Login Page Screenshot" />
+
+> 💡 Tip: You can keep all screenshots in a `screenshots/` folder inside your repo for better organization.
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
