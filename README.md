@@ -16,34 +16,32 @@ A modern full-stack **Next.js 15 + Clerk + Prisma** web application for managing
 ### Dashboard
 
 <p align="center">
-  <img src="./public/ss/admin-page.png" alt="Login Page Screenshot">
+  <img src="./public/ss/admin-page.png" alt="Admin dashboard">
 </p>
 
 ### Teacher List
 
 <p align="center">
-  <img src="./public/ss/teacher-list.png" alt="Login Page Screenshot">
+  <img src="./public/ss/teacher-list.png" alt="Teacher list Screenshot">
 </p>
 
 ### Single Teacher
 
 <p align="center">
-  <img src="./public/ss/single-teacher.png" alt="Login Page Screenshot">
+  <img src="./public/ss/single-teacher.png" alt="Single teacher page Screenshot">
 </p>
 
 ### Adding New Teacher
 
 <p align="center">
-  <img src="./public/ss/new-teacher-create.png" alt="Login Page Screenshot">
+  <img src="./public/ss/new-teacher-create.png" alt="New teacher form Screenshot">
 </p>
 
 ### Student List
 
 <p align="center">
-  <img src="./public/ss/student-list.png" alt="Login Page Screenshot">
+  <img src="./public/ss/student-list.png" alt="Student list page">
 </p>
-
-> 💡 Tip: You can keep all screenshots in a `screenshots/` folder inside your repo for better organization.
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
